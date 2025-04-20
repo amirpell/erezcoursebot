@@ -9,7 +9,6 @@ app.listen(port,()=>{
 });
 
 
-const allSessionObject = {};
 const client = new Client({
     authStrategy: new LocalAuth({
         clientId: "erez-course-client"
@@ -27,8 +26,9 @@ const client = new Client({
         ],
     }
 });
+
+let clientReady = false;
 client.on('qr', (qr) => {
-    // Generate and scan this code with your phone
     console.log('QR RECEIVED', qr);
 });
 
@@ -36,48 +36,57 @@ client.on('qr', (qr) => {
 client.on('ready', () => {
     console.log('Client is ready!');
    
-     // Number where you want to send the message.
-   
-     // Your message.
-   
-     // Getting chatId from the number.
-     // we have to delete "+" from the beginning and add "@c.us" at the end of the number.
-   
-    // Sending message.
-   });
+    clientReady = true;
 
+   });
+   client.on('disconnected', (reason) => {
+    console.error('⚠ Client was disconnected:', reason);
+    clientReady = false;
+    // אתחול מחדש אם נותק
+    setTimeout(() => {
+        console.log('🔁 Reinitializing client...');
+        client.initialize();
+    }, 5000);
+});
+client.on('auth_failure', (msg) => {
+    console.error('❌ Authentication failed:', msg);
+});
 
 
 client.initialize();
 
-app.get(`/sendmessage/:number`, async (req,res) =>{
-    
-        try{
-            const number = req.params.number;
-    const fullnumber = "+972"+number.slice(1)
-    console.log("+972"+number)
-    const text = `שלום! תודה שהתעניינת בקורס ״בניית תכניות אימון לעלייה במסת שריר – מיועד למאמני כושר אישיים ואונליין״ 💪 כדי שתוכל/י לקבל את כל הפרטים בנוחות – ריכזנו עבורך הכל במקום אחד:
- 🔹 מבנה ותכני הקורס
- 🔹 עלות הקורס
- 🔹 מי אנחנו ומה הניסיון שלנו
- 🔹 שאלות ותשובות נפוצות
- 🔹 המלצות של משתתפים קודמים
+app.get(`/sendmessage/:number`, async (req, res) => {
+    if (!clientReady) {
+        return res.status(503).json({ message: "Client not ready yet. Please try again shortly." });
+    }
 
-⬇ להיכנס לכל המידע בלינק המצורף:
-    https://progress-workout.com/מיועד-למאמני-כושר-אישיים-ומאמני-אונלי/
-    
-אם נשארת שאלה או משהו לא ברור – אנחנו כאן בוואטסאפ 🙋‍♂`
-    
-    const chatId = fullnumber.substring(1) + "@c.us";
-         
-            client.sendMessage(chatId, text);
-            console.log(chatId)
-            res.status(200).json({message: "seccess"})
-    
-        }
-        catch(error){
-            console.log(error);
-            res.status(500).json({message: "error"})
-        }
-    })
+    try {
+        const number = req.params.number;
+        const fullNumber = "+972" + number.slice(1);
+        console.log("Sending to:", fullNumber);
+        
+        const text = `שלום! תודה שהתעניינת בקורס ״בניית תכניות אימון לעלייה במסת שריר – מיועד למאמני כושר אישיים ואונליין״ 💪
+        כדי שתוכל/י לקבל את כל הפרטים בנוחות – ריכזנו עבורך הכל במקום אחד:
+        🔹 מבנה ותכני הקורס
+        🔹 עלות הקורס
+        🔹 מי אנחנו ומה הניסיון שלנו
+        🔹 שאלות ותשובות נפוצות
+        🔹 המלצות של משתתפים קודמים
+
+        ⬇ להיכנס לכל המידע בלינק המצורף:
+        https://progress-workout.com/מיועד-למאמני-כושר-אישיים-ומאמני-אונלי/
+
+        אם נשארת שאלה או משהו לא ברור – אנחנו כאן בוואטסאפ 🙋‍♂`;
+
+        const chatId = fullNumber.substring(1) + "@c.us";
+
+        await client.sendMessage(chatId, text);
+        console.log(`✅ Message sent to ${chatId}`);
+        res.status(200).json({ message: "Message sent successfully!" });
+
+    } catch (error) {
+        console.error('❌ Error:', error);
+        res.status(500).json({ message: "Failed to send message", error: error.message });
+    }
+});
     
