@@ -1,22 +1,21 @@
 const express = require('express');
 const app = express();
-const port = 3001;
-const { Client , LocalAuth } = require('whatsapp-web.js');
+const port = process.env.PORT || 3001;
+const { Client, LocalAuth } = require('whatsapp-web.js');
 
+// בדיקה אם הריצה בסביבת Production (כמו Render)
 
-app.listen(port,()=>{
-    console.log(`server on ${port}`);
+app.listen(port, () => {
+    console.log(`✅ Server running on port ${port}`);
 });
 
-
-const allSessionObject = {};
 const client = new Client({
     authStrategy: new LocalAuth({
-        clientId: "YOUR_CLIENT_ID"
+        clientId: "main-session"
     }),
     puppeteer: {
-        headless: true,
-        args: [
+        headless: false,
+        args:[
             '--no-sandbox',
             '--disable-setuid-sandbox',
             '--disable-extensions',
@@ -24,60 +23,54 @@ const client = new Client({
             '--no-default-browser-check',
             '--no-first-run',
             '--disable-dev-shm-usage',
-        ],
+            '--disable-accelerated-2d-canvas',
+            '--no-zygote',
+            '--single-process',
+        ]
     }
 });
+
 client.on('qr', (qr) => {
-    // Generate and scan this code with your phone
-    console.log('QR RECEIVED', qr);
+    console.log('📱 QR RECEIVED:\n', qr);
 });
 
-
 client.on('ready', () => {
-    console.log('Client is ready!');
-   
-     // Number where you want to send the message.
-   
-     // Your message.
-   
-     // Getting chatId from the number.
-     // we have to delete "+" from the beginning and add "@c.us" at the end of the number.
-   
-    // Sending message.
-   });
+    console.log('✅ WhatsApp client is ready!');
+});
 
+client.on('auth_failure', msg => {
+    console.error('❌ AUTHENTICATION FAILURE', msg);
+});
 
+client.on('disconnected', reason => {
+    console.warn('⚠ Client was logged out', reason);
+});
 
 client.initialize();
 
-app.get(`/sendmessage/:number`, async (req,res) =>{
-    
-        try{
-            const number = req.params.number;
-    const fullnumber = "+972"+number.slice(1)
-    console.log("+972"+number)
-    const text = `שלום! תודה שהתעניינת בקורס ״בניית תכניות אימון לעלייה במסת שריר – מיועד למאמני כושר אישיים ואונליין״ 💪 כדי שתוכל/י לקבל את כל הפרטים בנוחות – ריכזנו עבורך הכל במקום אחד:
- 🔹 מבנה ותכני הקורס
- 🔹 עלות הקורס
- 🔹 מי אנחנו ומה הניסיון שלנו
- 🔹 שאלות ותשובות נפוצות
- 🔹 המלצות של משתתפים קודמים
+app.get('/sendmessage/:number', async (req, res) => {
+    try {
+        const number = req.params.number;
+        const fullNumber = "+972" + number.slice(1);
+        const chatId = fullNumber.substring(1) + "@c.us";
+
+        const text = `שלום! תודה שהתעניינת בקורס ״בניית תכניות אימון לעלייה במסת שריר – מיועד למאמני כושר אישיים ואונליין״ 💪 כדי שתוכל/י לקבל את כל הפרטים בנוחות – ריכזנו עבורך הכל במקום אחד:
+🔹 מבנה ותכני הקורס
+🔹 עלות הקורס
+🔹 מי אנחנו ומה הניסיון שלנו
+🔹 שאלות ותשובות נפוצות
+🔹 המלצות של משתתפים קודמים
 
 ⬇ להיכנס לכל המידע בלינק המצורף:
-    https://progress-workout.com/מיועד-למאמני-כושר-אישיים-ומאמני-אונלי/
-    
-אם נשארת שאלה או משהו לא ברור – אנחנו כאן בוואטסאפ 🙋‍♂`
-    
-    const chatId = fullnumber.substring(1) + "@c.us";
-         
-            client.sendMessage(chatId, text);
-            console.log(chatId)
-            res.status(200).json({message: "seccess"})
-    
-        }
-        catch(error){
-            console.log(error);
-            res.status(500).json({message: "error"})
-        }
-    })
-    
+https://progress-workout.com/מיועד-למאמני-כושר-אישיים-ומאמני-אונלי/
+
+אם נשארת שאלה או משהו לא ברור – אנחנו כאן בוואטסאפ 🙋‍♂`;
+
+        await client.sendMessage(chatId, text);
+        console.log(`✅ Message sent to ${chatId}`);
+        res.status(200).json({ message: "Success" });
+    } catch (error) {
+        console.error('❌ Error sending message:', error.message);
+        res.status(500).json({ message: "Error", error: error.message });
+    }
+});
