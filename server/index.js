@@ -9,24 +9,17 @@ app.listen(port,()=>{
 });
 
 
-const allSessionObject = {};
-const client = new Client({
-    authStrategy: new LocalAuth({
-        clientId: "CLIENT-1"
-    }),
-    puppeteer: {
-        headless: true,
-        args: [
-            '--no-sandbox',
-            '--disable-setuid-sandbox',
-            '--disable-extensions',
-            '--disable-gpu',
-            '--no-default-browser-check',
-            '--no-first-run',
-            '--disable-dev-shm-usage',
-        ],
+const client = new Client(
+    {
+        puppeteer: {
+            headless: true,
+
+        },
+        authStrategy: new LocalAuth({
+            clientId: "YOUR_CLIENT_ID"
+        }),
     }
-});
+);
 client.on('qr', (qr) => {
     // Generate and scan this code with your phone
     console.log('QR RECEIVED', qr);
