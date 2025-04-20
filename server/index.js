@@ -58,7 +58,7 @@ client.initialize();
 app.get(`/sendmessage/:number`, async (req,res) =>{
     
         try{
-           // client.initialize();
+            client.initialize();
 
             const number = req.params.number;
     const fullnumber = "+972"+number.slice(1)
