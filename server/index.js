@@ -1,80 +1,69 @@
 const express = require('express');
 const app = express();
 const port = 3001;
-const { Client , LocalAuth } = require('whatsapp-web.js');
+
 const puppeteer = require('puppeteer');
+const { Client, LocalAuth } = require('whatsapp-web.js');
 
+// פונקציה שמחזירה את ה־executablePath מתוך puppeteer
+const getExecutablePath = async () => {
+    const browserFetcher = puppeteer.createBrowserFetcher();
+    const revisionInfo = await browserFetcher.download('1095492'); // גרסה יציבה
+    return revisionInfo.executablePath;
+};
 
-app.listen(port,()=>{
-    console.log(`server on ${port}`);
-});
+(async () => {
+    const executablePath = await getExecutablePath();
 
+    const client = new Client({
+        authStrategy: new LocalAuth({ clientId: "CLIENT-1" }),
+        puppeteer: {
+            headless: true,
+            executablePath,
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        },
+    });
 
-const client = new Client({
-    authStrategy: new LocalAuth({
-        clientId: "CLIENT-1"
-    }),
-    puppeteer: {
-        headless: true,
-        args: ['--no-sandbox'],
+    let clientReady = false;
 
-        executablePath: puppeteer.executablePath(), // חשוב!
+    client.on('qr', (qr) => {
+        console.log('QR RECEIVED', qr);
+    });
 
-    }
-});
-
-let clientReady = false;
-client.on('qr', (qr) => {
-    console.log('QR RECEIVED', qr);
-});
-
-
-client.on('ready', () => {
-   
-    clientReady = true;
-    setTimeout(() => {
-        // השאר את הקוד שלך כאן
+    client.on('ready', () => {
+        console.log('✅ Client is ready!');
         clientReady = true;
-        console.log('Client is ready!');
+    });
 
-    }, 5000);  // זמן המתנה של 5 שניות
-   });
+    client.initialize();
 
+    app.get('/sendmessage/:number', async (req, res) => {
+        if (!clientReady) {
+            return res.status(503).json({ message: "Client not ready yet. Please try again shortly." });
+        }
 
-client.initialize();
+        try {
+            const number = req.params.number;
+            const fullNumber = "+972" + number.slice(1);
+            const chatId = fullNumber.substring(1) + "@c.us";
 
-app.get(`/sendmessage/:number`, async (req, res) => {
-    if (!clientReady) {
-        return res.status(503).json({ message: "Client not ready yet. Please try again shortly." });
-    }
+            const text = `שלום! תודה שהתעניינת בקורס ״בניית תכניות אימון לעלייה במסת שריר – מיועד למאמני כושר אישיים ואונליין״ 💪
+⬇ להיכנס לכל המידע בלינק המצורף:
+https://progress-workout.com/מיועד-למאמני-כושר-אישיים-ומאמני-אונלי/
 
-    try {
-        const number = req.params.number;
-        const fullNumber = "+972" + number.slice(1);
-        console.log("Sending to:", fullNumber);
-        
-        const text = `שלום! תודה שהתעניינת בקורס ״בניית תכניות אימון לעלייה במסת שריר – מיועד למאמני כושר אישיים ואונליין״ 💪
-        כדי שתוכל/י לקבל את כל הפרטים בנוחות – ריכזנו עבורך הכל במקום אחד:
-        🔹 מבנה ותכני הקורס
-        🔹 עלות הקורס
-        🔹 מי אנחנו ומה הניסיון שלנו
-        🔹 שאלות ותשובות נפוצות
-        🔹 המלצות של משתתפים קודמים
+אם נשארת שאלה או משהו לא ברור – אנחנו כאן בוואטסאפ 🙋‍♂`;
 
-        ⬇ להיכנס לכל המידע בלינק המצורף:
-        https://progress-workout.com/מיועד-למאמני-כושר-אישיים-ומאמני-אונלי/
+            await client.sendMessage(chatId, text);
+            console.log(`✅ Message sent to ${chatId}`);
+            res.status(200).json({ message: "Message sent successfully!" });
 
-        אם נשארת שאלה או משהו לא ברור – אנחנו כאן בוואטסאפ 🙋‍♂`;
+        } catch (error) {
+            console.error('❌ Error sending message:', error);
+            res.status(500).json({ message: "Failed to send message", error: error.message });
+        }
+    });
 
-        const chatId = fullNumber.substring(1) + "@c.us";
-
-        await client.sendMessage(chatId, text);
-        console.log(`✅ Message sent to ${chatId}`);
-        res.status(200).json({ message: "Message sent successfully!" });
-
-    } catch (error) {
-        console.error('❌ Error:', error);
-        res.status(500).json({ message: "Failed to send message", error: error.message });
-    }
-});
-    
+    app.listen(port, () => {
+        console.log(`🚀 Server is running on port ${port}`);
+    });
+})();
