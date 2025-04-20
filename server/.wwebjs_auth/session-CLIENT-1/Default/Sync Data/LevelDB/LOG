@@ -1,2 +1,3 @@
-2025/04/20-16:18:41.707 8424 Creating DB C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session-CLIENT-1\Default\Sync Data\LevelDB since it was missing.
-2025/04/20-16:18:41.729 8424 Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session-CLIENT-1\Default\Sync Data\LevelDB/MANIFEST-000001
+2025/04/20-17:17:19.595 6f20 Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session-CLIENT-1\Default\Sync Data\LevelDB/MANIFEST-000001
+2025/04/20-17:17:19.605 6f20 Recovering log #3
+2025/04/20-17:17:19.606 6f20 Reusing old log C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session-CLIENT-1\Default\Sync Data\LevelDB/000003.log 

@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3001;
 const { Client , LocalAuth } = require('whatsapp-web.js');
+const puppeteer = require('puppeteer');
 
 
 app.listen(port,()=>{
@@ -15,7 +16,10 @@ const client = new Client({
     }),
     puppeteer: {
         headless: true,
-   
+        args: ['--no-sandbox'],
+
+        executablePath: puppeteer.executablePath(), // חשוב!
+
     }
 });
 
