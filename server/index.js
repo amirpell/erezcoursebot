@@ -34,12 +34,16 @@ client.on('qr', (qr) => {
 
 
 client.on('ready', () => {
-    console.log('Client is ready!');
    
     clientReady = true;
+    setTimeout(() => {
+        // השאר את הקוד שלך כאן
+        clientReady = true;
+        console.log('Client is ready!');
 
+    }, 5000);  // זמן המתנה של 5 שניות
    });
-   client.on('disconnected', (reason) => {
+client.on('disconnected', (reason) => {
     console.error('⚠ Client was disconnected:', reason);
     clientReady = false;
     // אתחול מחדש אם נותק
