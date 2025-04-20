@@ -9,7 +9,7 @@ const client = new Client({
         clientId: "erez-course-client"
     }),
     puppeteer: {
-        headless: true,
+        headless: false,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',

@@ -1,33 +1,16 @@
-2025/04/20-15:30:06.205 818 Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session-erez-course-client\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2025/04/20-15:30:06.206 818 Recovering log #84
-2025/04/20-15:30:06.705 818 Level-0 table #90: started
-2025/04/20-15:30:06.772 818 Level-0 table #90: 1197189 bytes OK
-2025/04/20-15:30:06.777 818 Delete type=0 #84
-2025/04/20-15:30:07.923 72b4 Level-0 table #93: started
-2025/04/20-15:30:07.946 72b4 Level-0 table #93: 367020 bytes OK
-2025/04/20-15:30:07.948 72b4 Delete type=0 #91
-2025/04/20-15:30:07.949 72b4 Manual compaction at level-0 from '\x00\x18\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x19\x00\x00\x00' @ 0 : 0; will stop at '\x00\x11\x04$\x01\x04\x00z\x00v\x00f\x00g\x00\x01\x12\x001\x003\x001\x004\x002\x007\x003\x004\x001\x006\x004\x000\x001\x000\x00@\x00l\x00i\x00d' @ 510524 : 1
-2025/04/20-15:30:07.949 72b4 Compacting 2@0 + 0@1 files
-2025/04/20-15:30:08.089 72b4 Generated table #94@0: 39354 keys, 804278 bytes
-2025/04/20-15:30:08.089 72b4 Compacted 2@0 + 0@1 files => 804278 bytes
-2025/04/20-15:30:08.090 72b4 compacted to: files[ 0 1 3 0 0 0 0 ]
-2025/04/20-15:30:08.091 72b4 Delete type=2 #93
-2025/04/20-15:30:08.092 72b4 Manual compaction at level-0 from '\x00\x11\x04$\x01\x04\x00z\x00v\x00f\x00g\x00\x01\x12\x001\x003\x001\x004\x002\x007\x003\x004\x001\x006\x004\x000\x001\x000\x00@\x00l\x00i\x00d' @ 510524 : 1 .. '\x00\x19\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/04/20-15:30:08.128 5b04 Level-0 table #96: started
-2025/04/20-15:30:08.134 5b04 Level-0 table #96: 14066 bytes OK
-2025/04/20-15:30:08.136 5b04 Delete type=2 #90
-2025/04/20-15:30:08.136 5b04 Delete type=0 #92
-2025/04/20-15:30:08.137 5b04 Manual compaction at level-0 from '\x00\x19\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1a\x00\x00\x00' @ 0 : 0; will stop at '\x00\x19\x00\x00\x05' @ 578145 : 0
-2025/04/20-15:30:08.137 5b04 Compacting 1@0 + 1@1 files
-2025/04/20-15:30:08.242 5b04 Generated table #97@0: 39743 keys, 817283 bytes
-2025/04/20-15:30:08.242 5b04 Compacted 1@0 + 1@1 files => 817283 bytes
-2025/04/20-15:30:08.243 5b04 compacted to: files[ 0 1 3 0 0 0 0 ]
-2025/04/20-15:30:08.244 5b04 Delete type=2 #96
-2025/04/20-15:30:08.244 5b04 Manual compaction at level-0 from '\x00\x19\x00\x00\x05' @ 578145 : 0 .. '\x00\x1a\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/04/20-15:30:10.264 83f0 Compacting 1@1 + 2@2 files
-2025/04/20-15:30:10.378 83f0 Generated table #98@1: 43085 keys, 2194591 bytes
-2025/04/20-15:30:10.523 83f0 Generated table #99@1: 30556 keys, 1757198 bytes
-2025/04/20-15:30:10.523 83f0 Compacted 1@1 + 2@2 files => 3951789 bytes
-2025/04/20-15:30:10.524 83f0 compacted to: files[ 0 0 3 0 0 0 0 ]
-2025/04/20-15:30:10.525 83f0 Delete type=2 #94
-2025/04/20-15:30:16.654 72b4 Manual compaction at level-0 from '\x00\x1b\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1c\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/04/20-15:35:47.983 7538 Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session-erez-course-client\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/04/20-15:35:47.984 7538 Recovering log #95
+2025/04/20-15:35:48.053 7538 Reusing old log C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session-erez-course-client\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000095.log 
+2025/04/20-15:35:48.054 7538 Delete type=2 #86
+2025/04/20-15:35:48.054 7538 Delete type=2 #87
+2025/04/20-15:35:48.054 7538 Delete type=2 #97
+2025/04/20-15:35:49.275 3f5c Level-0 table #102: started
+2025/04/20-15:35:49.293 3f5c Level-0 table #102: 459635 bytes OK
+2025/04/20-15:35:49.294 3f5c Delete type=0 #95
+2025/04/20-15:35:49.295 3f5c Manual compaction at level-0 from '\x00\x1c\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1d\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/04/20-15:35:51.011 7538 Compacting 1@1 + 3@2 files
+2025/04/20-15:35:51.091 7538 Generated table #103@1: 44125 keys, 2196411 bytes
+2025/04/20-15:35:51.178 7538 Generated table #104@1: 32136 keys, 2185845 bytes
+2025/04/20-15:35:51.267 7538 Generated table #105@1: 30053 keys, 1721798 bytes
+2025/04/20-15:35:51.267 7538 Compacted 1@1 + 3@2 files => 6104054 bytes
+2025/04/20-15:35:51.267 7538 compacted to: files[ 0 0 3 0 0 0 0 ]

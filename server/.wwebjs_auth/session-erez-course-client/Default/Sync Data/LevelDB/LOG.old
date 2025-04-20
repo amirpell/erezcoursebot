@@ -1,2 +1,3 @@
-2025/04/20-15:28:59.892 4ee0 Creating DB C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session-erez-course-client\Default\Sync Data\LevelDB since it was missing.
-2025/04/20-15:28:59.906 4ee0 Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session-erez-course-client\Default\Sync Data\LevelDB/MANIFEST-000001
+2025/04/20-15:30:05.415 74f0 Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session-erez-course-client\Default\Sync Data\LevelDB/MANIFEST-000001
+2025/04/20-15:30:05.416 74f0 Recovering log #3
+2025/04/20-15:30:05.417 74f0 Reusing old log C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session-erez-course-client\Default\Sync Data\LevelDB/000003.log 
