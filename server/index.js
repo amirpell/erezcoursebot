@@ -63,37 +63,28 @@ client.on('ready', () => {
 
 client.initialize();
 
-app.get(`/sendmessage/:number`, async (req,res) =>{
+const sendMessage = async (chatId, text) => {
     if (!isClientReady) {
-        return res.status(500).json({ message: "WhatsApp client not ready yet." });
+      console.log('WhatsApp client not ready, reconnecting...');
+      await client.initialize();
     }
-        try{
-
-            const number = req.params.number;
-    const fullnumber = "+972"+number.slice(1)
-    console.log("+972"+number)
-    const text = `שלום! תודה שהתעניינת בקורס ״בניית תכניות אימון לעלייה במסת שריר – מיועד למאמני כושר אישיים ואונליין״ 💪 כדי שתוכל/י לקבל את כל הפרטים בנוחות – ריכזנו עבורך הכל במקום אחד:
- 🔹 מבנה ותכני הקורס
- 🔹 עלות הקורס
- 🔹 מי אנחנו ומה הניסיון שלנו
- 🔹 שאלות ותשובות נפוצות
- 🔹 המלצות של משתתפים קודמים
-
-⬇ להיכנס לכל המידע בלינק המצורף:
-    https://progress-workout.com/מיועד-למאמני-כושר-אישיים-ומאמני-אונלי/
-    
-אם נשארת שאלה או משהו לא ברור – אנחנו כאן בוואטסאפ 🙋‍♂`
-    
-    const chatId = fullnumber.substring(1) + "@c.us";
-         
-     client.sendMessage(chatId, text);
-            console.log(chatId)
-            res.status(200).json({message: "seccess"})
-    
-        }
-        catch(error){
-            console.log(error);
-            res.status(500).json({message: "error"})
-        }
-    })
-    
+    await client.sendMessage(chatId, text);
+    console.log('Message sent to:', chatId);
+  };
+  
+  app.get(`/sendmessage/:number`, async (req, res) => {
+    if (!isClientReady) {
+      return res.status(500).json({ message: "WhatsApp client not ready yet." });
+    }
+    try {
+      const number = req.params.number;
+      const fullnumber = "+972" + number.slice(1);
+      const text = `שלום! תודה שהתעניינת בקורס ״בניית תכניות אימון לעלייה במסת שריר – מיועד למאמני כושר אישיים ואונליין״ 💪 ...`;
+      const chatId = fullnumber.substring(1) + "@c.us";
+      await sendMessage(chatId, text);
+      res.status(200).json({ message: "Success" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Error" });
+    }
+  });
