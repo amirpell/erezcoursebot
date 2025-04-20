@@ -1,3 +1,2 @@
-2025/04/20-14:27:02.286 6b54 Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session-YOUR_CLIENT_ID\Default\Local Storage\leveldb/MANIFEST-000001
-2025/04/20-14:27:02.288 6b54 Recovering log #3
-2025/04/20-14:27:02.289 6b54 Reusing old log C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session-YOUR_CLIENT_ID\Default\Local Storage\leveldb/000003.log 
+2025/04/20-15:04:23.108 3308 Creating DB C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session-YOUR_CLIENT_ID\Default\Local Storage\leveldb since it was missing.
+2025/04/20-15:04:23.181 3308 Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session-YOUR_CLIENT_ID\Default\Local Storage\leveldb/MANIFEST-000001

@@ -1,3 +1,2 @@
-2025/04/20-14:27:02.266 72c8 Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session-YOUR_CLIENT_ID\Default\Service Worker\Database/MANIFEST-000001
-2025/04/20-14:27:02.267 72c8 Recovering log #3
-2025/04/20-14:27:02.268 72c8 Reusing old log C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session-YOUR_CLIENT_ID\Default\Service Worker\Database/000003.log 
+2025/04/20-15:04:25.075 18b8 Creating DB C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session-YOUR_CLIENT_ID\Default\Service Worker\Database since it was missing.
+2025/04/20-15:04:25.100 18b8 Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session-YOUR_CLIENT_ID\Default\Service Worker\Database/MANIFEST-000001
