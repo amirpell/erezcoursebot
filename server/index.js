@@ -15,7 +15,7 @@ const client = new Client({
         clientId: "main-session"
     }),
     puppeteer: {
-        headless: false,
+        headless: true,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
