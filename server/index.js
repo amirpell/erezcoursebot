@@ -41,6 +41,9 @@ client.on('qr', (qr) => {
     console.log('QR RECEIVED', qr);
 });
 
+client.on('change_state', state => {
+    console.log('Client state changed:', state);
+});
 
 client.on('ready', () => {
     console.log('Client is ready!');
@@ -83,7 +86,7 @@ app.get(`/sendmessage/:number`, async (req,res) =>{
     
     const chatId = fullnumber.substring(1) + "@c.us";
          
-            client.sendMessage(chatId, text);
+    await client.sendMessage(chatId, text);
             console.log(chatId)
             res.status(200).json({message: "seccess"})
     
