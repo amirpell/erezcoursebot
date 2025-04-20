@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 const { Client , LocalAuth } = require('whatsapp-web.js');
 
 
@@ -53,6 +53,8 @@ client.initialize();
 app.get(`/sendmessage/:number`, async (req,res) =>{
     
         try{
+           // client.initialize();
+
             const number = req.params.number;
     const fullnumber = "+972"+number.slice(1)
     console.log("+972"+number)
