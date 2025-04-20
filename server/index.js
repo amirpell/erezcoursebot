@@ -13,7 +13,12 @@ const client = new Client(
     {
         puppeteer: {
             headless: true,
-
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-gpu',
+            ],
         },
         authStrategy: new LocalAuth({
             clientId: "YOUR_CLIENT_ID"
