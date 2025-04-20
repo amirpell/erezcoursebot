@@ -25,8 +25,12 @@ const client = new Client(
         }),
     }
 );
+let isClientReady = false;
+
 client.on('disconnected', (reason) => {
     console.log('🚫 הלקוח התנתק! סיבה:', reason);
+    isClientReady = false;
+
 });
 
 client.on('auth_failure', (message) => {
@@ -40,7 +44,8 @@ client.on('qr', (qr) => {
 
 client.on('ready', () => {
     console.log('Client is ready!');
-   
+    isClientReady = true;
+
      // Number where you want to send the message.
    
      // Your message.
@@ -56,7 +61,9 @@ client.on('ready', () => {
 client.initialize();
 
 app.get(`/sendmessage/:number`, async (req,res) =>{
-    
+    if (!isClientReady) {
+        return res.status(500).json({ message: "WhatsApp client not ready yet." });
+    }
         try{
 
             const number = req.params.number;
