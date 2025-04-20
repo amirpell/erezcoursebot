@@ -86,7 +86,7 @@ app.get(`/sendmessage/:number`, async (req,res) =>{
     
     const chatId = fullnumber.substring(1) + "@c.us";
          
-    await client.sendMessage(chatId, text);
+     client.sendMessage(chatId, text);
             console.log(chatId)
             res.status(200).json({message: "seccess"})
     
