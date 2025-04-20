@@ -20,6 +20,13 @@ const client = new Client(
         }),
     }
 );
+client.on('disconnected', (reason) => {
+    console.log('🚫 הלקוח התנתק! סיבה:', reason);
+});
+
+client.on('auth_failure', (message) => {
+    console.log('🔴 בעיית התחברות:', message);
+});
 client.on('qr', (qr) => {
     // Generate and scan this code with your phone
     console.log('QR RECEIVED', qr);
