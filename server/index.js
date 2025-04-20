@@ -1,19 +1,36 @@
 const express = require('express');
 const { Client, LocalAuth } = require('whatsapp-web.js');
+const fs = require('fs');
+const path = require('path');
+
 const app = express();
 const port = process.env.PORT || 3001;
+
+// ודא שתקיית האימות קיימת (במקרה והיא נמחקה בין דיפלואים)
+const authDir = path.join(__dirname, '.wwebjs_auth');
+if (!fs.existsSync(authDir)) {
+    fs.mkdirSync(authDir);
+}
 
 // אתחול הלקוח
 const client = new Client({
     authStrategy: new LocalAuth({
-        clientId: "erez-course-client"
+        clientId: "erez-course-client",
+        dataPath: './.wwebjs_auth'  // מוודא שזה מחפש את התיקיה במקום שאתה שולט עליו
     }),
     puppeteer: {
+        executablePath: '/usr/bin/google-chrome', // אופציונלי ב-Render עם buildpack תואם
         headless: true,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
-      
+            '--disable-dev-shm-usage',
+            '--disable-accelerated-2d-canvas',
+            '--disable-gpu',
+            '--no-first-run',
+            '--no-zygote',
+            '--single-process',
+            '--disable-extensions',
         ],
     }
 });
@@ -21,22 +38,18 @@ const client = new Client({
 // משתנה שמסמן אם הלקוח מוכן
 let clientReady = false;
 
-// אירוע קבלת QR
 client.on('qr', (qr) => {
     console.log('📱 סרוק את הקוד הזה כדי להתחבר לוואטסאפ:\n', qr);
 });
 
-// אירוע מוכנות
 client.on('ready', () => {
     console.log('✅ Client is ready!');
     clientReady = true;
 });
 
-// אירוע ניתוק
 client.on('disconnected', (reason) => {
     console.log('⚠ Client was disconnected:', reason);
     clientReady = false;
-    // אתחול מחדש
     setTimeout(() => {
         console.log('🔁 Reinitializing client...');
         client.initialize();
@@ -51,10 +64,9 @@ client.on('change_state', state => {
     console.log('📶 Client state changed:', state);
 });
 
-// אתחול הלקוח
 client.initialize();
 
-// פונקציה לשליחת הודעה עם ניסיון חוזר
+// פונקציה בטוחה לשליחת הודעה
 async function safeSendMessage(chatId, message, retries = 3) {
     for (let i = 0; i < retries; i++) {
         try {
@@ -67,7 +79,7 @@ async function safeSendMessage(chatId, message, retries = 3) {
     throw new Error('Failed to send message after retries');
 }
 
-// נקודת API לשליחת הודעה
+// שליחת הודעה דרך GET
 app.get('/sendmessage/:number', async (req, res) => {
     if (!clientReady) {
         return res.status(503).json({ message: "Client not ready yet. Please try again shortly." });
@@ -103,7 +115,6 @@ https://progress-workout.com/מיועד-למאמני-כושר-אישיים-ומ�
     }
 });
 
-// הפעלת השרת
 app.listen(port, () => {
     console.log(`🚀 Server is running on http://localhost:${port}`);
 });
