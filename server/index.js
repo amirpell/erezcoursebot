@@ -2,6 +2,7 @@ const express = require('express');
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const fs = require('fs');
 const path = require('path');
+const puppeteer = require('puppeteer'); // הוספת puppeteer אם לא הוספת קודם
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -16,7 +17,9 @@ if (!fs.existsSync(authDir)) {
 const client = new Client({
     authStrategy: new LocalAuth({
         clientId: "erez-course-client",
-        dataPath: './.wwebjs_auth'  // מוודא שזה מחפש את התיקיה במקום שאתה שולט עליו
+        dataPath: './.wwebjs_auth' , // מוודא שזה מחפש את התיקיה במקום שאתה שולט עליו
+        executablePath: puppeteer.executablePath(),  // זה ימציא את הנתיב הנכון לגרסה של Chromium
+
     }),
     puppeteer: {
         executablePath: '/usr/bin/google-chrome', // אופציונלי ב-Render עם buildpack תואם
