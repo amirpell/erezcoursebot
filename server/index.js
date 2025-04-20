@@ -13,11 +13,7 @@ const client = new Client({
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
-            '--disable-extensions',
-            '--disable-gpu',
-            '--no-default-browser-check',
-            '--no-first-run',
-            '--disable-dev-shm-usage',
+      
         ],
     }
 });
