@@ -43,18 +43,6 @@ client.on('ready', () => {
 
     }, 5000);  // זמן המתנה של 5 שניות
    });
-client.on('disconnected', (reason) => {
-    console.error('⚠ Client was disconnected:', reason);
-    clientReady = false;
-    // אתחול מחדש אם נותק
-    setTimeout(() => {
-        console.log('🔁 Reinitializing client...');
-        client.initialize();
-    }, 5000);
-});
-client.on('auth_failure', (msg) => {
-    console.error('❌ Authentication failed:', msg);
-});
 
 
 client.initialize();
