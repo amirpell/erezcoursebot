@@ -11,7 +11,7 @@ app.listen(port,()=>{
 
 const client = new Client({
     authStrategy: new LocalAuth({
-        clientId: "erez-course-client"
+        clientId: "CLIENT-1"
     }),
     puppeteer: {
         headless: true,
