@@ -32,8 +32,14 @@ client.on('ready', () => {
     isClientReady = true;
 });
 client.on('disconnected', reason => {
-    console.log('🚫 הלקוח התנתק! סיבה:', reason);
+    console.log('🚫 Client disconnected. Reason:', reason);
     isClientReady = false;
+
+    // חכה קצת ואז נסה לאתחל שוב
+    setTimeout(() => {
+        console.log('🔁 Reinitializing client...');
+        client.initialize();
+    }, 10000);
 });
 client.on('auth_failure', message => {
     console.log('🔴 בעיית התחברות:', message);
@@ -58,7 +64,7 @@ app.get('/sendmessage/:number',async (req, res) => {
     const number = req.params.number;
     const fullnumber = "+972" + number.slice(1);
     const chatId = fullnumber.substring(1) + "@c.us";
-    const text = `שלום! תודה שהתעניינת בקורס ״בניית תכניות אימון לעלייה במסת שריר – מיועד למאמני כושר אישיים ואונליין״  ...`;
+    const text = `שלום! תודה שהתעניינת בקורסי `;
 
     try {
         await client.sendMessage(chatId, text);
