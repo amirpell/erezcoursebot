@@ -1,11 +1,6 @@
-const express = require('express');
-const app = express();
-const port = process.env.PORT;
+
 const { Client, LocalAuth } = require('whatsapp-web.js');
 
-app.listen(port, () => {
-    console.log(`server on ${port}`);
-});
 
 const client = new Client({
     puppeteer: {
