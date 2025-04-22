@@ -65,7 +65,7 @@ setInterval(() => {
     if (isClientReady) {
       console.log('✅ Bot is alive');
     }
-  }, 6000); // כל דקה
+  }, 30000); // כל דקה
 // --- Endpoint ---
 app.get('/sendmessage/:number',async (req, res) => {
     if (!isClientReady) {
@@ -88,3 +88,6 @@ app.get('/sendmessage/:number',async (req, res) => {
 
     }
 });
+app.get('/ping', (req, res) => {
+    res.send('pong');
+  });
