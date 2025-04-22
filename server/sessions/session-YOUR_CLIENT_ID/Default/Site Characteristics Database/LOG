@@ -1,2 +1,3 @@
-2025/04/22-10:46:48.739 7358 Creating DB C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\sessions\session-YOUR_CLIENT_ID\Default\Site Characteristics Database since it was missing.
-2025/04/22-10:46:48.755 7358 Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\sessions\session-YOUR_CLIENT_ID\Default\Site Characteristics Database/MANIFEST-000001
+2025/04/22-10:51:15.169 60b4 Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\sessions\session-YOUR_CLIENT_ID\Default\Site Characteristics Database/MANIFEST-000001
+2025/04/22-10:51:15.170 60b4 Recovering log #3
+2025/04/22-10:51:15.171 60b4 Reusing old log C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\sessions\session-YOUR_CLIENT_ID\Default\Site Characteristics Database/000003.log 
