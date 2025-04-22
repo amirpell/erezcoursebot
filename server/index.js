@@ -74,5 +74,7 @@ app.get('/sendmessage/:number', (req, res) => {
     const text = `שלום! תודה שהתעניינת בקורס ״בניית תכניות אימון לעלייה במסת שריר – מיועד למאמני כושר אישיים ואונליין״  ...`;
 
     messageQueue.push({ chatId, text, res });
+    res.status(202).json({ message: "Message added to queue" });
+
     processQueue();
 });
