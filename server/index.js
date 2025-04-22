@@ -42,30 +42,12 @@ client.on('qr', qr => {
 client.initialize();
 
 // --- Queue handling ---
-const messageQueue = [];
-let isSending = false;
 
-const processQueue = async () => {
-    if (isSending || !isClientReady || messageQueue.length === 0) return;
-
-    isSending = true;
-    const { chatId, text, res } = messageQueue.shift();
-
-    try {
-        await client.sendMessage(chatId, text);
-        console.log('Message sent to:', chatId);
-        return res.status(200).json({ message: 'Message sent successfully' });
-    } catch (err) {
-        console.log('❌ Error sending message:', err);
-        res.status(500).json({ message: 'Failed to send' });
-    } finally {
-        isSending = false;
-        setTimeout(processQueue, 1500); // זמן בין הודעות
-    }
-};
 
 // --- Endpoint ---
 app.get('/sendmessage/:number',async (req, res) => {
+    console.log('isClientReady:', isClientReady);
+
     if (!isClientReady) {
         return res.status(500).json({ message: "WhatsApp client not ready yet." });
     }
@@ -89,3 +71,8 @@ app.get('/sendmessage/:number',async (req, res) => {
 app.get('/ping', (req, res) => {
     res.send('pong');
   });
+  setInterval(() => {
+    if (isClientReady) {
+        console.log('✅ Bot is alive');
+    }
+}, 60000); // כל דקה

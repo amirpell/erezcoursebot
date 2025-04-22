@@ -1,2 +1,3 @@
-2025/04/22-10:46:48.968 5450 Creating DB C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\sessions\session-YOUR_CLIENT_ID\Default\Local Storage\leveldb since it was missing.
-2025/04/22-10:46:49.014 5450 Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\sessions\session-YOUR_CLIENT_ID\Default\Local Storage\leveldb/MANIFEST-000001
+2025/04/22-11:40:12.233 7f18 Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\sessions\session-YOUR_CLIENT_ID\Default\Local Storage\leveldb/MANIFEST-000001
+2025/04/22-11:40:12.235 7f18 Recovering log #3
+2025/04/22-11:40:12.239 7f18 Reusing old log C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\sessions\session-YOUR_CLIENT_ID\Default\Local Storage\leveldb/000003.log 

@@ -1,3 +1,6 @@
-2025/04/22-10:51:15.346 9740 Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\sessions\session-YOUR_CLIENT_ID\Default\Local Storage\leveldb/MANIFEST-000001
-2025/04/22-10:51:15.368 9740 Recovering log #3
-2025/04/22-10:51:15.371 9740 Reusing old log C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\sessions\session-YOUR_CLIENT_ID\Default\Local Storage\leveldb/000003.log 
+2025/04/22-11:41:54.878 4aa0 Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\sessions\session-YOUR_CLIENT_ID\Default\Local Storage\leveldb/MANIFEST-000001
+2025/04/22-11:41:54.878 4aa0 Recovering log #3
+2025/04/22-11:41:54.879 4aa0 Reusing old log C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\sessions\session-YOUR_CLIENT_ID\Default\Local Storage\leveldb/000003.log 
+2025/04/22-11:43:55.876 4aa0 Level-0 table #5: started
+2025/04/22-11:43:55.882 4aa0 Level-0 table #5: 21720 bytes OK
+2025/04/22-11:43:55.885 4aa0 Delete type=0 #3
