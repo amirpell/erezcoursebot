@@ -1,5 +1,4 @@
 const express = require('express');
-const { default: puppeteer } = require('puppeteer');
 const app = express();
 const port = process.env.PORT || 10000;
 const { Client, LocalAuth } = require('whatsapp-web.js');
@@ -19,7 +18,7 @@ const client = new Client({
             '--disable-gpu',
             '--no-zygote'
         ],
-        executablePath: '/usr/bin/chromium' // זה הנתיב שבו chromium יותקן ב־Render
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium'
 
     },
     authStrategy: new LocalAuth({ clientId: "YOUR_CLIENT_ID",
