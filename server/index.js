@@ -9,7 +9,7 @@ app.listen(port, () => {
 
 const client = new Client({
     puppeteer: {
-        headless: true,
+        headless: 'new',
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -35,11 +35,7 @@ client.on('disconnected', reason => {
     console.log('🚫 Client disconnected. Reason:', reason);
     isClientReady = false;
 
-    // חכה קצת ואז נסה לאתחל שוב
-    setTimeout(() => {
-        console.log('🔁 Reinitializing client...');
-        client.initialize();
-    }, 10000);
+  
 });
 client.on('auth_failure', message => {
     console.log('🔴 בעיית התחברות:', message);
