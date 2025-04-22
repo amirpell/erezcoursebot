@@ -52,7 +52,7 @@ const processQueue = async () => {
     try {
         await client.sendMessage(chatId, text);
         console.log('Message sent to:', chatId);
-        res.status(200).json({ message: 'Success' });
+        return res.status(200).json({ message: 'Message sent successfully' });
     } catch (err) {
         console.log('❌ Error sending message:', err);
         res.status(500).json({ message: 'Failed to send' });
