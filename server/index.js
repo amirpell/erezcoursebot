@@ -63,7 +63,7 @@ const processQueue = async () => {
 };
 
 // --- Endpoint ---
-app.get('/sendmessage/:number', (req, res) => {
+app.get('/sendmessage/:number',async (req, res) => {
     if (!isClientReady) {
         return res.status(500).json({ message: "WhatsApp client not ready yet." });
     }
@@ -73,8 +73,10 @@ app.get('/sendmessage/:number', (req, res) => {
     const chatId = fullnumber.substring(1) + "@c.us";
     const text = `שלום! תודה שהתעניינת בקורס ״בניית תכניות אימון לעלייה במסת שריר – מיועד למאמני כושר אישיים ואונליין״  ...`;
 
-    messageQueue.push({ chatId, text, res });
-    res.status(202).json({ message: "Message added to queue" });
-
-    processQueue();
+    try {
+        await client.sendMessage(chatId, text);
+        console.log('✅ Message sent to:', chatId);
+    } catch (err) {
+        console.error('❌ Error sending message:', err.message);
+    }
 });
