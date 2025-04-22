@@ -9,7 +9,7 @@ app.listen(port, () => {
 
 const client = new Client({
     puppeteer: {
-        headless: false,
+        headless: true,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -31,15 +31,8 @@ client.on('ready', () => {
     console.log('Client is ready!');
     isClientReady = true;
 });
-client.on('disconnected', reason => {
-    console.log('🚫 Client disconnected. Reason:', reason);
-    isClientReady = false;
 
-  
-});
-client.on('auth_failure', message => {
-    console.log('🔴 בעיית התחברות:', message);
-});
+
 client.on('qr', qr => {
     console.log('QR RECEIVED', qr);
 });
@@ -73,14 +66,3 @@ app.get('/sendmessage/:number',async (req, res) => {
 
     }
 });
-app.get('/ping', (req, res) => {
-    res.send('pong');
-  });
-  setInterval(() => {
-    if (isClientReady) {
-        console.log('✅ Bot is alive');
-    }
-}, 60000); // כל דקה
-
-
-
