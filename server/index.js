@@ -9,7 +9,7 @@ app.listen(port, () => {
 
 const client = new Client({
     puppeteer: {
-        headless: 'new',
+        headless: false,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -81,3 +81,6 @@ app.get('/ping', (req, res) => {
         console.log('✅ Bot is alive');
     }
 }, 60000); // כל דקה
+
+
+
