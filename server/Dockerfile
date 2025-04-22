@@ -1,4 +1,4 @@
-FROM zenika/alpine-chrome:with-node
+FROM zenika/alpine-chrome:with-node-latest
 
 # התקנת Chromium וחבילות דרושות על Alpine
 RUN apk update && apk add --no-cache \
