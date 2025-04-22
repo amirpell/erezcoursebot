@@ -1,4 +1,5 @@
 const express = require('express');
+const { default: puppeteer } = require('puppeteer');
 const app = express();
 const port = process.env.PORT || 10000;
 const { Client, LocalAuth } = require('whatsapp-web.js');
@@ -14,8 +15,11 @@ const client = new Client({
             '--no-sandbox',
             '--disable-setuid-sandbox',
             '--disable-dev-shm-usage',
+            '--single-process',
             '--disable-gpu',
+            '--no-zygote'
         ],
+        executablePath: process.env.NODE_ENV === "production" ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(),
     },
     authStrategy: new LocalAuth({ clientId: "YOUR_CLIENT_ID",
         dataPath: "sessions"
