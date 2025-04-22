@@ -21,7 +21,7 @@ ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser \
 # תיקיית עבודה (עובדים בתיקיית /server)
 WORKDIR /server
 
-# העתקת קבצי package.json ו- package-lock.json
+# העתקת קבצי package.json ו- package-lock.json (אם קיים)
 COPY package*.json ./
 
 # התקנת התלויות
