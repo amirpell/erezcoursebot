@@ -1,3 +1,4 @@
+# השתמש בתמונה בסיסית של Alpine
 FROM alpine:latest
 
 # התקנת חבילות דרושות
@@ -13,18 +14,20 @@ RUN apk update && apk add --no-cache \
     nodejs \
     npm
 
-# משתני סביבה בשביל puppeteer
+# משתני סביבה בשביל Puppeteer
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser \
     PUPPETEER_SKIP_DOWNLOAD=true
 
-# תיקיית עבודה
+# תיקיית עבודה (עובדים בתיקיית /server)
 WORKDIR /server
 
-# התקנת תלויות
+# העתקת קבצי package.json ו- package-lock.json
 COPY package*.json ./
+
+# התקנת התלויות
 RUN npm install
 
-# העתקת קבצי פרויקט
+# העתקת שאר קבצי הפרויקט לתוך הקונטיינר
 COPY . .
 
 # הרצת האפליקציה
