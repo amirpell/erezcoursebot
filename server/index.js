@@ -25,11 +25,9 @@ const client = new Client({
      }),
 });
 
-let isClientReady = false;
 
 client.on('ready', () => {
     console.log('Client is ready!');
-    isClientReady = true;
 });
 
 
@@ -43,12 +41,9 @@ client.initialize();
 
 
 // --- Endpoint ---
-app.get('/sendmessage/:number',async (req, res) => {
-    console.log('isClientReady:', isClientReady);
+app.get('/sendmessages/:number',async (req, res) => {
 
-    if (!isClientReady) {
-        return res.status(500).json({ message: "WhatsApp client not ready yet." });
-    }
+    
 
     const number = req.params.number;
     const fullnumber = "+972" + number.slice(1);
