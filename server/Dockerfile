@@ -1,6 +1,6 @@
-FROM zenika/alpine-chrome:with-node-latest
+FROM alpine:latest
 
-# התקנת Chromium וחבילות דרושות על Alpine
+# התקנת חבילות דרושות
 RUN apk update && apk add --no-cache \
     chromium \
     nss \
@@ -9,7 +9,9 @@ RUN apk update && apk add --no-cache \
     ttf-freefont \
     libx11 \
     xdg-utils \
-    bash
+    bash \
+    nodejs \
+    npm
 
 # משתני סביבה בשביל puppeteer
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser \
