@@ -76,7 +76,11 @@ app.get('/sendmessage/:number',async (req, res) => {
     try {
         await client.sendMessage(chatId, text);
         console.log('✅ Message sent to:', chatId);
+        return res.status(200).json({ message: 'Message sent successfully' }); // ✅ שולח תגובה חזרה
+
     } catch (err) {
         console.error('❌ Error sending message:', err.message);
+        return res.status(500).json({ message: 'Failed to send message', error: err.message }); // ✅ שולח שגיאה
+
     }
 });
