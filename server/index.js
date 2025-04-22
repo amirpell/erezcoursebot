@@ -17,7 +17,9 @@ const client = new Client({
             '--disable-gpu',
         ],
     },
-    authStrategy: new LocalAuth({ clientId: "YOUR_CLIENT_ID" }),
+    authStrategy: new LocalAuth({ clientId: "YOUR_CLIENT_ID",
+        dataPath: "sessions"
+     }),
 });
 
 let isClientReady = false;
