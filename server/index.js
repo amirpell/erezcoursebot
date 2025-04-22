@@ -61,11 +61,7 @@ const processQueue = async () => {
         setTimeout(processQueue, 1500); // זמן בין הודעות
     }
 };
-setInterval(() => {
-    if (isClientReady) {
-      console.log('✅ Bot is alive');
-    }
-  }, 30000); // כל דקה
+
 // --- Endpoint ---
 app.get('/sendmessage/:number',async (req, res) => {
     if (!isClientReady) {
