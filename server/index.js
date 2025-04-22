@@ -9,7 +9,7 @@ app.listen(port, () => {
 
 const client = new Client({
     puppeteer: {
-        headless: true,
+        headless: false,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -18,7 +18,6 @@ const client = new Client({
             '--disable-gpu',
             '--no-zygote'
         ],
-        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium'
 
     },
     authStrategy: new LocalAuth({ clientId: "YOUR_CLIENT_ID",
