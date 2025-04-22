@@ -19,7 +19,7 @@ const client = new Client({
             '--disable-gpu',
             '--no-zygote'
         ],
-        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/google-chrome-stable', // נתיב לכרום בקונטיינר
+        executablePath: '/usr/bin/chromium' // זה הנתיב שבו chromium יותקן ב־Render
 
     },
     authStrategy: new LocalAuth({ clientId: "YOUR_CLIENT_ID",
