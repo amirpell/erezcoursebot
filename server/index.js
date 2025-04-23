@@ -38,10 +38,16 @@ client.on('auth_failure', (msg) => {
     console.error('❌ Authentication failed:', msg);
 });
 
-client.on('disconnected', (reason) => {
+client.on('disconnected', async (reason) => {
+    console.warn('⚠️ Client disconnected:', reason);
     isClientReady = false;
-    console.warn('⚠️ Client was disconnected. Reinitializing...', reason);
-    client.initialize();
+
+    try {
+        await client.destroy();
+        await client.initialize();
+    } catch (err) {
+        console.error('❌ Error reinitializing client:', err);
+    }
 });
 
 // אתחול הלקוח
@@ -54,7 +60,7 @@ app.listen(port, () => {
 
 // שליחת הודעה
 app.get('/sendmessages/:number', async (req, res) => {
-    if (!isClientReady || !client.info || !client.info.wid) {
+    if (!isClientReady || !client.info || !client.info.wid|| !client) {
         return res.status(503).json({ message: 'Client not ready' });
     }
 
@@ -64,6 +70,7 @@ app.get('/sendmessages/:number', async (req, res) => {
     const text = `שלום! תודה שהתעניינת בקורסי `;
 
     try {
+        console.log('Trying to send to', fullnumber, 'as', chatId);
         await client.sendMessage(chatId, text);
         console.log('✅ Message sent to:', chatId);
         return res.status(200).json({ message: 'Message sent successfully' });
