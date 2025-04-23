@@ -1,0 +1,12 @@
+2025/04/23-15:03:18.792 6678 Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\sessions\session-whatsapp-client\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/04/23-15:03:18.793 6678 Recovering log #76
+2025/04/23-15:03:18.814 6678 Reusing old log C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\sessions\session-whatsapp-client\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000076.log 
+2025/04/23-15:03:18.814 6678 Delete type=2 #70
+2025/04/23-15:03:18.814 6678 Delete type=2 #71
+2025/04/23-15:03:18.814 6678 Delete type=2 #72
+2025/04/23-15:03:18.814 6678 Delete type=2 #78
+2025/04/23-15:03:21.710 6678 Manual compaction at level-0 from '\x00\x1b\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1c\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/04/23-15:03:30.177 944c Level-0 table #84: started
+2025/04/23-15:03:30.417 944c Level-0 table #84: 271581 bytes OK
+2025/04/23-15:03:30.454 944c Delete type=0 #76
+2025/04/23-15:03:30.455 944c Manual compaction at level-0 from '\x00\x1c\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1d\x00\x00\x00' @ 0 : 0; will stop at (end)

@@ -4,6 +4,9 @@ const app = express();
 const port = process.env.PORT || 10000;
 
 let isClientReady = false;
+app.listen(port, () => {
+    console.log(`🚀 Server is running on port ${port}`);
+});
 
 // יצירת לקוח WhatsApp
 const client = new Client({
@@ -33,9 +36,7 @@ client.on('ready', () => {
     console.log('✅ Client is ready!');
 });
 
-client.on('auth_failure', (msg) => {
-    console.error('❌ Authentication failed:', msg);
-});
+
 
 client.on('disconnected', async (reason) => {
     console.warn('⚠️ Client disconnected:', reason);
@@ -53,9 +54,6 @@ client.on('disconnected', async (reason) => {
 client.initialize();
 
 // שרת Express
-app.listen(port, () => {
-    console.log(`🚀 Server is running on port ${port}`);
-});
 
 // שליחת הודעה
 app.get('/sendmessages/:number', async (req, res) => {
