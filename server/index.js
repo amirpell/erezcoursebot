@@ -13,9 +13,8 @@ const client = new Client({
             '--no-sandbox',
             '--disable-setuid-sandbox',
             '--disable-dev-shm-usage',
-            '--single-process',
             '--disable-gpu',
-            '--no-zygote'
+            
         ]
     },
     authStrategy: new LocalAuth({
