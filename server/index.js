@@ -9,7 +9,7 @@ app.listen(port, () => {
 
 const client = new Client({
     puppeteer: {
-        headless: true,
+        headless: false,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -26,18 +26,32 @@ const client = new Client({
 });
 
 
-client.on('ready', () => {
-    console.log('Client is ready!');
+const waitForClientReady = new Promise((resolve, reject) => {
+    client.on('ready', () => {
+        console.log('Client is ready!');
+        resolve(); // Resolve when the client is ready
+    });
+
+    client.on('qr', qr => {
+        console.log('QR RECEIVED', qr);
+    });
+
+    client.on('auth_failure', () => {
+        reject('Authentication failed');
+    });
+
+    client.on('disconnected', () => {
+        reject('Client disconnected');
+    });
 });
 
+async function initializeClient() {
+    await client.initialize();
+    await waitForClientReady; // Wait here until the client is ready
+    console.log('Now the client is ready and we can proceed with other operations');
+}
 
-client.on('qr', qr => {
-    console.log('QR RECEIVED', qr);
-});
-
-client.initialize();
-
-// --- Queue handling ---
+initializeClient();
 
 
 // --- Endpoint ---
