@@ -20,7 +20,7 @@ const client = new Client({
     },
     authStrategy: new LocalAuth({
         clientId: "whatsapp-client",
-        dataPath: "./sessions" // שים לב: ב-Render זה עלול להימחק בכל deploy!
+        dataPath: "sessions" // שים לב: ב-Render זה עלול להימחק בכל deploy!
     })
 });
 
