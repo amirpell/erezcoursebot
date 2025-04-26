@@ -4,7 +4,7 @@ const { Client, LocalAuth } = require('whatsapp-web.js');
 const app = express();
 app.use(express.json());
 
-app.post('/send-message/:number', async (req, res) => {
+app.get('/send-message/:number', async (req, res) => {
     const  number  = req.params.number;
 
     const message = "hello"
