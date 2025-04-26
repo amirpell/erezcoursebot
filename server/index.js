@@ -1,78 +1,53 @@
 const express = require('express');
 const { Client, LocalAuth } = require('whatsapp-web.js');
+
 const app = express();
-const port = process.env.PORT || 10000;
+app.use(express.json());
 
-let isClientReady = false;
-app.listen(port, () => {
-    console.log(`🚀 Server is running on port ${port}`);
+app.post('/send-message/:number', async (req, res) => {
+    const  number  = req.params.number;
+
+    const message = "hello"
+    const client = new Client({
+        authStrategy: new LocalAuth(),
+        puppeteer: {
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        }
+    });
+
+    client.on('qr', (qr) => {
+        console.log('Scan this QR code to log in:', qr);
+    });
+
+    client.on('ready', async () => {
+        console.log('Client is ready!');
+        const fullnumber = "+972" + number.slice(1);
+        const chatId = fullnumber.substring(1) + "@c.us";
+
+        try {
+            await client.sendMessage(chatId, message);
+            console.log('Message sent!');
+            await client.logout(); // OR client.destroy() if you want to keep session
+            return res.status(200).json({ success: true, message: 'Message sent' });
+        } catch (err) {
+            console.error('Send message error:', err);
+            return res.status(500).json({ error: 'Failed to send message' });
+        } finally {
+            client.destroy();
+        }
+    });
+
+    client.on('auth_failure', (msg) => {
+        console.error('Auth failure:', msg);
+        return res.status(401).json({ error: 'Authentication failed' });
+    });
+
+    client.initialize();
 });
 
-// יצירת לקוח WhatsApp
-const client = new Client({
-    puppeteer: {
-        headless: true,
-        args: [
-            '--no-sandbox',
-            '--disable-setuid-sandbox',
-            '--disable-dev-shm-usage',
-            '--disable-gpu',
-            
-        ]
-    },
-    authStrategy: new LocalAuth({
-        clientId: "whatsapp-client",
-        dataPath: "sessions" // שים לב: ב-Render זה עלול להימחק בכל deploy!
-    })
+const PORT = process.env.PORT||10000 ;
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-// אירועים של הלקוח
-client.on('qr', qr => {
-    console.log('📱 QR RECEIVED', qr);
-});
-
-client.on('ready', () => {
-    isClientReady = true;
-    console.log('✅ Client is ready!');
-});
-
-
-
-client.on('disconnected', async (reason) => {
-    console.warn('⚠️ Client disconnected:', reason);
-    isClientReady = false;
-
-    try {
-        await client.destroy();
-        await client.initialize();
-    } catch (err) {
-        console.error('❌ Error reinitializing client:', err);
-    }
-});
-
-// אתחול הלקוח
-client.initialize();
-
-// שרת Express
-
-// שליחת הודעה
-app.get('/sendmessages/:number', async (req, res) => {
-    if (!isClientReady || !client.info || !client.info.wid|| !client) {
-        return res.status(503).json({ message: 'Client not ready' });
-    }
-
-    const number = req.params.number;
-    const fullnumber = "+972" + number.slice(1);
-    const chatId = fullnumber.substring(1) + "@c.us";
-    const text = `שלום! תודה שהתעניינת בקורסי `;
-
-    try {
-        console.log('Trying to send to', fullnumber, 'as', chatId);
-        await client.sendMessage(chatId, text);
-        console.log('✅ Message sent to:', chatId);
-        return res.status(200).json({ message: 'Message sent successfully' });
-    } catch (err) {
-        console.error('❌ Error sending message:', err.message);
-        return res.status(500).json({ message: 'Failed to send message', error: err.message });
-    }
-});
