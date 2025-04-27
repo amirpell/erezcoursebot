@@ -13,7 +13,12 @@ const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
         headless: 'new',
-        args: ['--no-sandbox', '--disable-setuid-sandbox','--disable-dev-shm-usage'],
+        args: [  '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-extensions',
+            '--disable-gpu',
+            '--no-zygote'],
          dataPath: "./sessions"
     }
 });
