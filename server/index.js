@@ -51,6 +51,7 @@ createClient(); // יצירה אחת בלבד כשהשרת עולה
 app.post('/send-message', async (req, res) => {
    // const { number } = req.params;
     const contactPhoneFromQuery = req.query.email;
+    console.log('email from query:', req.query.email);
 
     const message = "Hello from your bot!";
 
