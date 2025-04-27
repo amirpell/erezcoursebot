@@ -52,7 +52,7 @@ app.post('/send-message', async (req, res) => {
    // const { number } = req.params;
     const contactPhoneFromQuery = req.query.email;
   
-    console.log('email from query:', req.query);
+    console.log('body fields:', req.body.fields);
 
     const message = "Hello from your bot!";
 
