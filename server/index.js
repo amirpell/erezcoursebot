@@ -13,6 +13,8 @@ function createClient() {
             dataPath: "sessions"
          }),        puppeteer: {
             headless: "new",
+            executablePath: process.env.CHROME_BIN || '/opt/render/project/.chrome', // הוספת נתיב ל-Chromium
+
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
@@ -60,7 +62,7 @@ app.post('/send-message/:number', async (req, res) => {
 
     console.log(`Attempting to send message to: ${fullnumber}`); // לוג
     try {
-        await client.sendMessage(chatId, message);
+         client.sendMessage(chatId, message);
         console.log(`Message sent to ${fullnumber}`); // לוג אחרי שליחה
         return res.status(200).json({ success: true, message: `Message sent to ${fullnumber}` });
     } catch (err) {
