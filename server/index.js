@@ -13,7 +13,7 @@ function createClient() {
             dataPath: "sessions"
          }),        puppeteer: {
             headless: "new",
-            executablePath: process.env.CHROME_BIN || '/opt/render/project/.chrome', // הוספת נתיב ל-Chromium
+            executablePath: process.env.CHROME_BIN || '/usr/bin/chromium-browser', // הוספת נתיב ל-Chromium
 
             args: [
                 '--no-sandbox',
