@@ -48,15 +48,17 @@ function createClient() {
 createClient(); // יצירה אחת בלבד כשהשרת עולה
 
 // שליחת הודעה
-app.post('/send-message/:number', async (req, res) => {
-    const { number } = req.params;
+app.post('/send-message', async (req, res) => {
+   // const { number } = req.params;
+    const contactPhoneFromQuery = req.query.email;
+
     const message = "Hello from your bot!";
 
-    if (!number) {
+    if (!contactPhoneFromQuery) {
         return res.status(400).json({ error: 'Number is required' });
     }
 
-    const fullnumber = "+972" + number.slice(1);
+    const fullnumber = "+972" + contactPhoneFromQuery.slice(1);
     const chatId = fullnumber.substring(1) + "@c.us";
 
     console.log(`Attempting to send message to: ${fullnumber}`); // לוג
