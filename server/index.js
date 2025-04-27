@@ -9,8 +9,9 @@ let client;
 
 function createClient() {
     client = new Client({
-        authStrategy: new LocalAuth(),
-        puppeteer: {
+        authStrategy: new LocalAuth({ clientId: "YOUR_CLIENT_ID",
+            dataPath: "sessions"
+         }),        puppeteer: {
             headless: "new",
             args: [
                 '--no-sandbox',
@@ -74,3 +75,4 @@ const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
