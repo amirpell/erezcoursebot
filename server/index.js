@@ -57,22 +57,20 @@ app.post('/send-message/:number', async (req, res) => {
         return res.status(400).json({ error: 'Number is required' });
     }
 
-    if (!client || !client.info) {
-        return res.status(500).json({ error: 'Client is not ready yet' });
-    }
-
     const fullnumber = "+972" + number.slice(1);
     const chatId = fullnumber.substring(1) + "@c.us";
 
+    console.log(`Attempting to send message to: ${fullnumber}`); // לוג
     try {
         await client.sendMessage(chatId, message);
-        console.log(`Message sent to ${fullnumber}`);
+        console.log(`Message sent to ${fullnumber}`); // לוג אחרי שליחה
         return res.status(200).json({ success: true, message: `Message sent to ${fullnumber}` });
     } catch (err) {
         console.error('Send message error:', err);
         return res.status(500).json({ error: 'Failed to send message' });
     }
 });
+
 
 // התחלת השרת
 const PORT = process.env.PORT || 10000;
