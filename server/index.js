@@ -71,7 +71,7 @@ app.post('/send-message/:number', async (req, res) => {
 
 
 // התחלת השרת
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
