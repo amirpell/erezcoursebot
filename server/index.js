@@ -5,44 +5,60 @@ const path = require('path');
 const app = express();
 app.use(express.json());
 
-// Serve the HTML file
 app.use(express.static('public'));
 
-// Create WhatsApp client
-const client = new Client({
-    authStrategy: new LocalAuth(),
-    puppeteer: {
-        headless: "new",
-        args: [  '--no-sandbox',
-            '--disable-setuid-sandbox',
-            '--disable-dev-shm-usage',
-            '--disable-extensions',
-            '--disable-gpu',
-            '--no-zygote'],
-         dataPath: "./sessions"
-    }
-});
+let client;
 
-// WhatsApp events
-client.on('qr', (qr) => {
-    console.log('Scan this QR code to log in:', qr);
-});
+function createClient() {
+    client = new Client({
+        authStrategy: new LocalAuth(),
+        puppeteer: {
+            headless: "new",
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-extensions',
+                '--disable-gpu',
+                '--no-zygote'
+            ],
+            executablePath: process.env.CHROME_BIN || null // לרנדר זה חשוב
+        }
+    });
 
-client.on('ready', () => {
-    console.log('Client is ready!');
-});
+    client.on('qr', (qr) => {
+        console.log('Scan this QR code to log in:', qr);
+    });
 
-client.initialize();
+    client.on('ready', () => {
+        console.log('Client is ready!');
+    });
 
-// Home page
+    client.on('disconnected', (reason) => {
+        console.log('Client disconnected:', reason);
+        client.destroy();
+        client = null;
+        createClient(); // תנסה להתחבר שוב אוטומטית
+    });
 
-// Send message via POST and number in URL
+    client.initialize().catch(err => {
+        console.error('Failed to initialize client:', err);
+    });
+}
+
+createClient(); // יצירה אחת בלבד כשהשרת עולה
+
+// שליחת הודעה
 app.post('/send-message/:number', async (req, res) => {
     const { number } = req.params;
-    const message = "Hello from your bot! 🤖"; // you can change this
+    const message = "Hello from your bot! 🤖";
 
     if (!number) {
         return res.status(400).json({ error: 'Number is required' });
+    }
+
+    if (!client || !client.info) {
+        return res.status(500).json({ error: 'Client is not ready yet' });
     }
 
     const fullnumber = "+972" + number.slice(1);
@@ -58,9 +74,8 @@ app.post('/send-message/:number', async (req, res) => {
     }
 });
 
-// Start server
+// התחלת השרת
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
-
