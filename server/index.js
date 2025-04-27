@@ -12,7 +12,7 @@ app.use(express.static('public'));
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
-        headless: true,
+        headless: 'new',
         args: ['--no-sandbox', '--disable-setuid-sandbox','--disable-dev-shm-usage'],
          dataPath: "./sessions"
     }
