@@ -1,3 +1,2 @@
-2025/04/27-09:16:18.027 138c Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session\Default\shared_proto_db/MANIFEST-000001
-2025/04/27-09:16:18.028 138c Recovering log #3
-2025/04/27-09:16:18.028 138c Reusing old log C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session\Default\shared_proto_db/000003.log 
+2025/04/27-09:18:51.611 9f80 Creating DB C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session\Default\shared_proto_db since it was missing.
+2025/04/27-09:18:51.623 9f80 Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session\Default\shared_proto_db/MANIFEST-000001

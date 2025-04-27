@@ -1,3 +1,2 @@
-2025/04/27-09:16:17.505 a3d4 Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session\Default\Site Characteristics Database/MANIFEST-000001
-2025/04/27-09:16:17.506 a3d4 Recovering log #3
-2025/04/27-09:16:17.506 a3d4 Reusing old log C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session\Default\Site Characteristics Database/000003.log 
+2025/04/27-09:18:51.121 610c Creating DB C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session\Default\Site Characteristics Database since it was missing.
+2025/04/27-09:18:51.214 610c Reusing MANIFEST C:\Users\amirp\Desktop\New folder (4)\whatsappbot\server\.wwebjs_auth\session\Default\Site Characteristics Database/MANIFEST-000001
