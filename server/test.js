@@ -1,6 +1,6 @@
 const QRCode = require('qrcode-terminal');
 
-const text = '2@lsel6LWdREeESYtl2ybjmrktQbHiz1GCDN8FXtQ9NkcvSnb2pCbPBWbK2cndpY6KKihmz0M5nxH5ePdi4ZtXiev2PBEq9v2TqcA=,9BhICU2CMPK/UJhEaJY99k5sAUsztkQ4Hz4gCeOW9jM=,j3H5pLuFjRTBvKdUJO+FlMaOQRv3nnG6SRFPjzizPC4=,36KdX8C+pkrEdjc/4LAOdRtbBSuagRxuKENlhgwVXJY=,1';
+const text = '2@IPFIHyMmJ25c8/xiQwNSFYMECn59WoeaIp0jdn3mK0jYK8uzTeG+tvDhV2QlhXl59tK3SRgvIFKEySoNViHMdoHDhjmOQa7lPyg=,HnYcPC55mt6YytocYDSCqDHzh43biTXZHTd1IuDHtDk=,/7CJWfgjLLcmHZ/17jUTNm7rlG7y4pAAW74Tm1VHHRw=,DfQv/RTUkK3eI5fk994ZPmni6u8j3hZvCw9H2GRwdTg=,1';
 
 QRCode.generate(text, { small: true }, function (qrcode) {
     console.log(qrcode);

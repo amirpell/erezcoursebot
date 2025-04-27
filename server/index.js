@@ -12,8 +12,9 @@ app.use(express.static('public'));
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        headless: false,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+         dataPath: "./sessions"
     }
 });
 
@@ -24,10 +25,6 @@ client.on('qr', (qr) => {
 
 client.on('ready', () => {
     console.log('Client is ready!');
-});
-
-client.on('auth_failure', (msg) => {
-    console.error('Auth failure:', msg);
 });
 
 client.initialize();
@@ -61,3 +58,4 @@ const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
