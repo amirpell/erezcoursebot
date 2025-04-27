@@ -3,9 +3,7 @@ const { Client, LocalAuth } = require('whatsapp-web.js');
 const path = require('path');
 
 const app = express();
-app.use(express.json());
 
-app.use(express.static('public'));
 
 let client;
 
@@ -22,7 +20,6 @@ function createClient() {
                 '--disable-gpu',
                 '--no-zygote'
             ],
-            executablePath: process.env.CHROME_BIN || null // לרנדר זה חשוב
         }
     });
 
@@ -51,7 +48,7 @@ createClient(); // יצירה אחת בלבד כשהשרת עולה
 // שליחת הודעה
 app.post('/send-message/:number', async (req, res) => {
     const { number } = req.params;
-    const message = "Hello from your bot! 🤖";
+    const message = "Hello from your bot!";
 
     if (!number) {
         return res.status(400).json({ error: 'Number is required' });
