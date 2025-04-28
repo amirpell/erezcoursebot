@@ -51,7 +51,7 @@ createClient(); // יצירה אחת בלבד כשהשרת עולה
 // שליחת הודעה
 app.post('/send-message', async (req, res) => {
    // const { number } = req.params;
-   const phoneNumber = req.body.fields.email.value;
+   const phoneNumber = req.body.fields.field_adcf804.value;
   
     console.log('body fields:', req.body);
 
